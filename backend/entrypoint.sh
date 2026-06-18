@@ -19,6 +19,10 @@ if grep -q "APP_KEY=$" .env || ! grep -q "APP_KEY=" .env; then
 fi
 
 echo "Running migrations and seeders..."
-php artisan migrate --seed --force
+
+until php artisan migrate --seed --force 2>/dev/null; do
+    echo "Database not ready. Retrying in 2 seconds..."
+    sleep 2
+done
 
 exec "$@"
