@@ -1,0 +1,16 @@
+.idea/*
+.vscode/*
+*.env
+node_modules/
+dist/
+coverage/
+vendor/
+logs/
+*.log
+.DS_Store
+*.swp
+*.swo
+*.bak
+*.tmp
+*.cache
+*.tsbuildinfo
