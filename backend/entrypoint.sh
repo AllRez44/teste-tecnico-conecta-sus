@@ -13,7 +13,7 @@ if [ ! -f ".env" ] && [ -f ".env.example" ]; then
     cp .env.example .env
 fi
 
-if grep -q "APP_KEY=$" .env || ! grep -q "APP_KEY=" .env; then
+if ! grep -q "APP_KEY=base64:" .env; then
     echo "Generating Laravel encryption key (APP_KEY)..."
     php artisan key:generate
 fi
