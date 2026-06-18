@@ -14,3 +14,4 @@ logs/
 *.tmp
 *.cache
 *.tsbuildinfo
+*compose.override.yaml
