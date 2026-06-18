@@ -19,7 +19,7 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['*'],
+    'allowed_origins' => [$_ENV['FRONTEND_URL'], 'same-origin'],
 
     'allowed_origins_patterns' => [],
 
