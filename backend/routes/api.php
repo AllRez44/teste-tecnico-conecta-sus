@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Api\ApiController;
+use App\Http\Controllers\Api\AddressController;
+use App\Http\Controllers\Api\PatientController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,8 +16,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
-
 Route::get("/", [ApiController::class, 'index']);
+Route::apiResource('addresses', AddressController::class);
+Route::apiResource('patients', PatientController::class);
