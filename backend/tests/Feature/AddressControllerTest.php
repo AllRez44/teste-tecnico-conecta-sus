@@ -93,4 +93,21 @@ class AddressControllerTest extends TestCase
         $response->assertStatus(422);
         $this->assertDatabaseHas('addresses', ['id' => $address->id]);
     }
+
+    public function test_can_show_address()
+    {
+        $address = Address::factory()->create();
+
+        $response = $this->getJson("/api/addresses/{$address->id}");
+
+        $response->assertStatus(200)
+            ->assertJsonFragment($address->toArray());
+    }
+
+    public function test_cannot_show_invalid_address()
+    {
+        $response = $this->getJson('/api/addresses/999999');
+
+        $response->assertStatus(404);
+    }
 }

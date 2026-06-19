@@ -210,4 +210,26 @@ class PatientControllerTest extends TestCase
         $response->assertStatus(204);
         $this->assertDatabaseMissing('patients', ['id' => $patient->id]);
     }
+
+    public function test_can_show_patient()
+    {
+        $address = Address::factory()->create();
+        $patient = Patient::factory()->create([
+            'address_id' => $address->id,
+            'cpf' => $this->generateValidCpf(),
+            'cns' => $this->generateValidCns(),
+        ]);
+
+        $response = $this->getJson("/api/patients/{$patient->id}");
+
+        $response->assertStatus(200)
+            ->assertJsonFragment($patient->toArray());
+    }
+
+    public function test_cannot_show_invalid_patient()
+    {
+        $response = $this->getJson('/api/patients/999999');
+
+        $response->assertStatus(404);
+    }
 }
