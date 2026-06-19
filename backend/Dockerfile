@@ -9,7 +9,9 @@ RUN apt-get update && apt-get install -y \
     git \
     default-mysql-client
 
-RUN docker-php-ext-install pdo_mysql bcmath xml gd
+COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
+
+RUN install-php-extensions pdo_mysql bcmath xml gd pcov xdebug
 
 COPY --from=composer:2.2 /usr/bin/composer /usr/bin/composer
 
