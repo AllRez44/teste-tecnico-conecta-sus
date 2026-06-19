@@ -1,0 +1,52 @@
+<?php
+
+namespace App\Http\Controllers\Api;
+
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreAddressRequest;
+use App\Http\Requests\UpdateAddressRequest;
+use App\Services\AddressService;
+use Illuminate\Http\JsonResponse;
+
+class AddressController extends Controller
+{
+    private AddressService $addressService;
+
+    public function __construct(AddressService $addressService)
+    {
+        $this->addressService = $addressService;
+    }
+
+    public function index(): JsonResponse
+    {
+        $addresses = $this->addressService->all();
+        return response()->json($addresses);
+    }
+
+    public function store(StoreAddressRequest $request): JsonResponse
+    {
+        $address = $this->addressService->store($request->validated());
+        return response()->json($address, 201);
+    }
+
+    public function show(int $id): JsonResponse
+    {
+        $address = $this->addressService->find($id);
+        if (!$address) {
+            return response()->json(['message' => 'Endereço não encontrado'], 404);
+        }
+        return response()->json($address);
+    }
+
+    public function update(UpdateAddressRequest $request, int $id): JsonResponse
+    {
+        $this->addressService->update($id, $request->validated());
+        return response()->json($this->addressService->find($id));
+    }
+
+    public function destroy(int $id): JsonResponse
+    {
+        $this->addressService->delete($id);
+        return response()->json(null, 204);
+    }
+}
