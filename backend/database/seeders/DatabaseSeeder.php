@@ -13,6 +13,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        $addressSeeder = new AddressSeeder();
+        $patientSeeder = new PatientSeeder();
+
+        $addresses = $addressSeeder->default();
+        $patientSeeder->default($addresses);
     }
 }
+
