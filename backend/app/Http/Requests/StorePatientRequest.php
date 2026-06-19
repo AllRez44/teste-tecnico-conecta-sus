@@ -41,7 +41,7 @@ class StorePatientRequest extends FormRequest
         'cns',
         'unique:patients,cns'
       ],
-      'birth_date' => 'required|date',
+      'birth_date' => 'required|date|before_or_equal:today',
       'gender' => 'required|string|size:1|in:M,F,O',
       'address_id' => 'required|integer|exists:addresses,id',
       'phone' => 'nullable|string|size:11|regex:/^[0-9]+$/',
