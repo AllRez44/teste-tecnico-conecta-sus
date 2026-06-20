@@ -10,11 +10,9 @@ use Illuminate\Http\JsonResponse;
 
 class PatientController extends Controller
 {
-    private PatientService $patientService;
-
-    public function __construct(PatientService $patientService)
-    {
-        $this->patientService = $patientService;
+    public function __construct(
+        private PatientService $patientService,
+    ) {
     }
 
     public function index(): JsonResponse

@@ -9,11 +9,9 @@ use Illuminate\Validation\ValidationException;
 
 class AddressService
 {
-    private AddressRepository $addressRepository;
-
-    public function __construct(AddressRepository $addressRepository)
-    {
-        $this->addressRepository = $addressRepository;
+    public function __construct(
+      private AddressRepository $addressRepository,
+    ) {
     }
 
     public function all(): Collection

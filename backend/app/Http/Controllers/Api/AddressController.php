@@ -10,11 +10,9 @@ use Illuminate\Http\JsonResponse;
 
 class AddressController extends Controller
 {
-    private AddressService $addressService;
-
-    public function __construct(AddressService $addressService)
-    {
-        $this->addressService = $addressService;
+    public function __construct(
+      private AddressService $addressService,
+    ) {
     }
 
     public function index(): JsonResponse

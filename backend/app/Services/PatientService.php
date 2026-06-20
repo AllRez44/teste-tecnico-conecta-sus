@@ -8,11 +8,9 @@ use Illuminate\Database\Eloquent\Collection;
 
 class PatientService
 {
-    private PatientRepository $patientRepository;
-
-    public function __construct(PatientRepository $patientRepository)
-    {
-        $this->patientRepository = $patientRepository;
+    public function __construct(
+        private PatientRepository $patientRepository,
+    ) {
     }
 
     public function all(): Collection
