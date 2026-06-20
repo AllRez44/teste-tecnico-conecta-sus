@@ -2,7 +2,9 @@
 
 namespace App\Services;
 
+use App\Models\Address;
 use App\Repositories\AddressRepository;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Validation\ValidationException;
 
 class AddressService
@@ -14,27 +16,27 @@ class AddressService
         $this->addressRepository = $addressRepository;
     }
 
-    public function all()
+    public function all(): Collection
     {
         return $this->addressRepository->all();
     }
 
-    public function find(int $id)
+    public function find(int $id): ?Address
     {
         return $this->addressRepository->find($id);
     }
 
-    public function store(array $data)
+    public function store(array $data): ?Address
     {
         return $this->addressRepository->create($data);
     }
 
-    public function update(int $id, array $data)
+    public function update(int $id, array $data): int
     {
         return $this->addressRepository->update($data, $id);
     }
 
-    public function delete(int $id)
+    public function delete(int $id): bool
     {
         $address = $this->addressRepository->find($id);
 
