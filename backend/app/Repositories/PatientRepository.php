@@ -3,12 +3,12 @@
 namespace App\Repositories;
 
 use App\Models\Patient;
-use App\Repositories\RepositoryInterface;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 class PatientRepository implements RepositoryInterface
 {
-    public function all(): \Illuminate\Database\Eloquent\Collection
+    public function all(): Collection
     {
         return Patient::all();
     }
