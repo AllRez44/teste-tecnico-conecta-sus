@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\ApiController;
 use App\Http\Controllers\Api\AddressController;
+use App\Http\Controllers\Api\DashboardController;
 use App\Http\Controllers\Api\PatientController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,3 +20,4 @@ use Illuminate\Support\Facades\Route;
 Route::get("/", [ApiController::class, 'index']);
 Route::apiResource('addresses', AddressController::class);
 Route::apiResource('patients', PatientController::class);
+Route::apiResource('dashboard', DashboardController::class);
