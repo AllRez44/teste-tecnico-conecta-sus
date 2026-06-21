@@ -19,7 +19,40 @@ class AddressControllerTest extends TestCase
         $response = $this->getJson('/api/addresses');
 
         $response->assertStatus(200)
-            ->assertJsonCount(3);
+            ->assertJsonCount(3, 'data');
+    }
+
+    public function test_can_paginate_addresses_per_page()
+    {
+        Address::factory()->count(5)->create();
+
+        $response = $this->getJson('/api/addresses?per_page=2');
+
+        $response->assertStatus(200)
+            ->assertJsonCount(2, 'data');
+    }
+
+    public function test_can_paginate_addresses_page()
+    {
+        Address::factory()->count(5)->create();
+
+        $response = $this->getJson('/api/addresses?per_page=3&page=2');
+
+        $response->assertStatus(200)
+            ->assertJsonCount(2, 'data')
+            ->assertJsonPath('current_page', 2);
+    }
+
+    public function test_can_search_addresses()
+    {
+        Address::factory()->create(['street' => 'Rua de Teste Silva']);
+        Address::factory()->create(['street' => 'Avenida Principal']);
+        Address::factory()->create(['street' => 'Rua de Teste Santos']);
+
+        $response = $this->getJson('/api/addresses?search=Teste');
+
+        $response->assertStatus(200)
+            ->assertJsonCount(2, 'data');
     }
 
     public function test_can_create_address()

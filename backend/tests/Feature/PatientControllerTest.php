@@ -36,7 +36,60 @@ class PatientControllerTest extends TestCase
         $response = $this->getJson('/api/patients');
 
         $response->assertStatus(200)
-            ->assertJsonCount(3);
+            ->assertJsonCount(3, 'data');
+    }
+
+    public function test_can_paginate_patients_per_page()
+    {
+        $address = Address::factory()->create();
+        Patient::factory()->count(4)->create([
+            'address_id' => $address->id,
+            'cpf' => function() { return $this->generateValidCpf(); },
+            'cns' => function() { return $this->generateValidCns(); },
+        ]);
+
+        $response = $this->getJson('/api/patients?per_page=2');
+
+        $response->assertStatus(200)
+            ->assertJsonCount(2, 'data');
+    }
+
+    public function test_can_paginate_patients_page()
+    {
+        $address = Address::factory()->create();
+        Patient::factory()->count(4)->create([
+            'address_id' => $address->id,
+            'cpf' => function() { return $this->generateValidCpf(); },
+            'cns' => function() { return $this->generateValidCns(); },
+        ]);
+
+        $response = $this->getJson('/api/patients?per_page=3&page=2');
+
+        $response->assertStatus(200)
+            ->assertJsonCount(1, 'data')
+            ->assertJsonPath('current_page', 2);
+    }
+
+    public function test_can_search_patients()
+    {
+        $address = Address::factory()->create();
+        Patient::factory()->create([
+            'name' => 'João Silva Teste',
+            'address_id' => $address->id,
+            'cpf' => function() { return $this->generateValidCpf(); },
+            'cns' => function() { return $this->generateValidCns(); },
+        ]);
+        Patient::factory()->create([
+            'name' => 'Maria Oliveira',
+            'address_id' => $address->id,
+            'cpf' => function() { return $this->generateValidCpf(); },
+            'cns' => function() { return $this->generateValidCns(); },
+        ]);
+
+        $response = $this->getJson('/api/patients?search=João');
+
+        $response->assertStatus(200)
+            ->assertJsonCount(1, 'data');
     }
 
     public function test_can_create_patient()
