@@ -15,3 +15,32 @@ export const formatApiSearchParams = (query) => {
   const searchParams = new URLSearchParams(q).toString();
   return searchParams ? `?${searchParams}` : '';
 };
+
+export const getOnlyNumbers = (str) => {
+  if (!str) return '';
+  return String(str).replace(/\D/g, '');
+};
+
+export const formatCEP = (cep) => {
+  if (!cep) return '-';
+  const clean = getOnlyNumbers(cep);
+  if (clean.length !== 8) return cep;
+  
+  return `${clean.slice(0, 5)}-${clean.slice(5)}`;
+};
+
+export const formatCPF = (cpf) => {
+  if (!cpf) return '-';
+  const clean = getOnlyNumbers(cpf);
+  if (clean.length !== 11) return cpf;
+  
+  return `${clean.slice(0, 3)}.${clean.slice(3, 6)}.${clean.slice(6, 9)}-${clean.slice(9)}`;
+};
+
+export const formatCNS = (cns) => {
+  if (!cns) return '-';
+  const clean = getOnlyNumbers(cns);
+  if (clean.length !== 15) return cns;
+  
+  return `${clean.slice(0, 3)} ${clean.slice(3, 7)} ${clean.slice(7, 11)} ${clean.slice(11)}`;
+};
