@@ -70,7 +70,19 @@ export default {
   },
   methods: {
     handleSearch(value) {
-      console.log(`Search value: ${value}`);
+      const query = { ...this.$route.query };
+
+      if (value) {
+        query.search = value;
+      } else {
+        delete query.search;
+      }
+
+      this.$router.push({ query }).catch(err => {
+        if (err.name !== 'NavigationDuplicated') {
+          throw err;
+        }
+      });
     }
   }
 }
