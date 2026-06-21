@@ -20,9 +20,19 @@ const routes = [
     component: () => import('../views/enderecos/Index.vue'),
   },
   {
+    path: '/enderecos/novo/:id?',
+    name: 'enderecos-form',
+    component: () => import('../views/enderecos/Form.vue'),
+  },
+  {
     path: '/pacientes',
     name: 'pacientes',
     component: () => import('../views/pacientes/Index.vue'),
+  },
+  {
+    path: '/pacientes/novo/:id?',
+    name: 'pacientes-form',
+    component: () => import('../views/pacientes/Form.vue'),
   },
 ]
 
