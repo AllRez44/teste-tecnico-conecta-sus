@@ -2,6 +2,7 @@
 import PageHeader from "@/components/PageHeader.vue";
 import PageLayout from "@/components/layouts/PageLayout.vue";
 import TablePaginated from "@/components/TablePaginated.vue";
+import ConfirmModal from "@/components/ConfirmModal.vue";
 import { formatDate, formatApiSearchParams, formatCPF, formatCNS } from "@/utils";
 
 export default {
@@ -9,7 +10,8 @@ export default {
   components: {
     PageHeader,
     PageLayout,
-    TablePaginated
+    TablePaginated,
+    ConfirmModal
   },
   computed: {
     items() {
@@ -17,6 +19,10 @@ export default {
     },
     totalRows() {
       return this.$store.state.pagination.patients?.totalRows || 0;
+    },
+    deleteMessage() {
+      if (!this.itemToDelete) return '';
+      return `Tem certeza que deseja excluir o paciente ${this.itemToDelete.name} de CPF ${this.formatCPF(this.itemToDelete.cpf)}?`;
     }
   },
   data() {
@@ -27,7 +33,8 @@ export default {
         { key: 'cns', label: 'CNS', thClass: 'font-weight-bold text-dark' },
         { key: 'birth_date', label: 'Data de Nascimento', thClass: 'font-weight-bold text-dark' },
         { key: 'acoes', label: 'Ações', thClass: 'font-weight-bold text-dark text-right', tdClass: 'text-right' }
-      ]
+      ],
+      itemToDelete: null
     }
   },
   methods: {
@@ -38,7 +45,18 @@ export default {
       console.log('Editar Paciente', item);
     },
     handleDelete(item) {
-      console.log('Excluir Paciente', item);
+      this.itemToDelete = item;
+      this.$bvModal.show('delete-modal');
+    },
+    async confirmDelete() {
+      if (!this.itemToDelete) return;
+      try {
+        await this.$store.dispatch('deletePatient', { id: this.itemToDelete.id });
+        this.itemToDelete = null;
+        this.$bvModal.hide('delete-modal');
+      } catch (error) {
+        console.error('Failed to delete patient', error);
+      }
     },
     async fetchPatients() {
       const searchParams = formatApiSearchParams(this.$route.query);
@@ -93,6 +111,14 @@ export default {
         </b-button>
       </template>
     </TablePaginated>
+
+    <ConfirmModal 
+      id="delete-modal"
+      title="Excluir Paciente"
+      :message="deleteMessage"
+      @confirm="confirmDelete"
+      @cancel="$bvModal.hide('delete-modal')"
+    />
   </PageLayout>
 </template>
 
