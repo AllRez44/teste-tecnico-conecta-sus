@@ -56,17 +56,21 @@
       <div class="flex-grow-1 p-4 overflow-auto">
         <slot />
       </div>
+
+      <ErrorToast />
     </div>
   </div>
 </template>
 
 <script>
 import SearchBar from '@/components/SearchBar.vue';
+import ErrorToast from '@/components/ErrorToast.vue';
 
 export default {
   name: 'AppLayout',
   components: {
-    SearchBar
+    SearchBar,
+    ErrorToast
   },
   methods: {
     handleSearch(value) {
