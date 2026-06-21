@@ -1,10 +1,9 @@
 <template>
-  <div class="dashboard p-3">
-    <div class="mb-5 text-left">
-      <h2 class="font-weight-bold text-dark mb-2">Visão Geral do Painel</h2>
-      <p class="text-muted mb-0" style="font-size: 1.1rem;">Métricas em tempo real e atividade recente da rede de saúde.</p>
-    </div>
-
+  <PageLayout>
+    <PageHeader
+      title="Visão Geral do Painel"
+      subtitle="Métricas em tempo real e atividade recente da rede de saúde."
+    />
     <b-row>
       <b-col md="6" class="mb-4 d-flex">
         <b-card class="custom-card shadow-sm w-100">
@@ -42,14 +41,20 @@
         </b-card>
       </b-col>
     </b-row>
-  </div>
+  </PageLayout>
 </template>
 
 <script>
 import { numberFormatter } from "@/utils";
+import PageHeader from "@/components/PageHeader.vue";
+import PageLayout from "@/components/PageLayout.vue";
 
 export default {
   name: "DashboardView",
+  components: {
+    PageHeader,
+    PageLayout
+  },
   computed: {
     patientsCount() {
       return this.$store.getters.totalPatientsCount;
