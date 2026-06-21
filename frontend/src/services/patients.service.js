@@ -17,3 +17,7 @@ export const apiGetPatient = async({ id }) => {
 export const apiPostPatient = async({ patient }) => {
     return await api.post('/patients', patient);
 }
+
+export const apiDeletePatient = async({ id }) => {
+    return await api.delete('/patients/' + id);
+}

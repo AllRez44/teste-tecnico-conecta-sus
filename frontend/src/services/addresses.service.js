@@ -16,3 +16,7 @@ export const apiGetAddress = async({ id }) => {
 export const apiPostAddress = async({ addresses }) => {
     return await api.post('/addresses', addresses);
 }
+
+export const apiDeleteAddress = async({ id }) => {
+    return await api.delete('/addresses/' + id);
+}
