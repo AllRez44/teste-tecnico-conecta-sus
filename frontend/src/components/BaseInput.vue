@@ -1,12 +1,13 @@
 <template>
-  <b-form-group :label="label" :label-for="id" :invalid-feedback="error">
-    <b-form-input
+  <b-form-group :label="label" :label-for="id" :invalid-feedback="error" :state="error ? false : null" label-class="text-left font-weight-bold">
+    <input
+      class="form-control"
+      :class="{ 'is-invalid': !!error }"
       :id="id"
-      :value="value"
-      @input="$emit('input', $event)"
+      v-model="computedValue"
       v-bind="$attrs"
-      :state="state"
-    ></b-form-input>
+      v-mask="mask"
+    />
   </b-form-group>
 </template>
 
@@ -30,11 +31,20 @@ export default {
     error: {
       type: String,
       default: ''
+    },
+    mask: {
+      type: [String, Array],
+      default: undefined
     }
   },
   computed: {
-    state() {
-      return this.error ? false : null;
+    computedValue: {
+      get() {
+        return this.value;
+      },
+      set(val) {
+        this.$emit('input', val);
+      }
     }
   }
 }
