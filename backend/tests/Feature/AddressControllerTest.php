@@ -59,7 +59,6 @@ class AddressControllerTest extends TestCase
     public function test_can_create_address()
     {
         $payload = [
-            'name' => 'Casa',
             'street' => 'Rua das Flores',
             'zip_code' => '12345678',
             'neighborhood' => 'Centro',
@@ -94,7 +93,6 @@ class AddressControllerTest extends TestCase
         $address = Address::factory()->create();
 
         $payload = [
-            'name' => 'Casa Nova',
             'street' => 'Rua Atualizada',
             'zip_code' => '87654321',
             'neighborhood' => 'Bairro Novo',

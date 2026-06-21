@@ -24,7 +24,6 @@ class StoreAddressRequest extends FormRequest
   public function rules()
   {
     return [
-      'name' => 'required|string|max:255',
       'street' => 'required|string|max:255',
       'zip_code' => 'required|string|string|size:8|regex:/^[0-9]+$/',
       'neighborhood' => 'required|string|max:255',
@@ -58,7 +57,6 @@ class StoreAddressRequest extends FormRequest
   public function attributes()
   {
     return [
-      'name' => 'nome',
       'street' => 'rua',
       'zip_code' => 'CEP',
       'neighborhood' => 'bairro',
