@@ -46,12 +46,12 @@ export const addressesStore = {
                 throw error;
             }
         },
-        async postAddress({ commit }, { patient }) {
+        async postAddress({ commit }, { address }) {
             try {
-                const response = await apiPostAddress({ patient });
+                const response = await apiPostAddress({ address });
                 commit('setAddress', response.data);
             } catch (error) {
-                console.error(`Error posting address: ${JSON.stringify(patient.toString())} \n Error:`, error);
+                console.error(`Error posting address: ${JSON.stringify(address.toString())} \n Error:`, error);
                 throw error;
             }
         },
