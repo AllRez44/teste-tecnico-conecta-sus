@@ -12,17 +12,17 @@ const routes = [
   {
     path: '/dashboard',
     name: 'dashboard',
-    component: () => import('../views/DashboardView.vue'),
+    component: () => import('../views/Dashboard.vue'),
   },
   {
-    path: '/addresses',
-    name: 'addresses',
-    component: () => import('../views/AddressesView.vue'),
+    path: '/enderecos',
+    name: 'enderecos',
+    component: () => import('../views/enderecos/Index.vue'),
   },
   {
-    path: '/patients',
-    name: 'patients',
-    component: () => import('../views/PatientsView.vue'),
+    path: '/pacientes',
+    name: 'pacientes',
+    component: () => import('../views/pacientes/Index.vue'),
   },
 ]
 

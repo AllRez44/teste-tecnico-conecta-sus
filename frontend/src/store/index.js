@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import {addressesStore} from "@/store/addresses-store";
-import {patientsStore} from "@/store/patients-store";
-import {apiGetDashboard} from "@/services/dashboard-service";
+import {addressesStore} from "@/store/modules/addresses";
+import {patientsStore} from "@/store/modules/patients";
+import {apiGetDashboard} from "@/services/dashboard.service";
 
 
 Vue.use(Vuex)

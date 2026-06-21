@@ -1,4 +1,4 @@
-import {apiGetAddress, apiGetAddresses, apiPostAddress} from "@/services/addresses-service";
+import {apiGetAddress, apiGetAddresses, apiPostAddress} from "@/services/addresses.service";
 
 export const addressesStore = {
     state: () => ({

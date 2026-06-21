@@ -5,8 +5,8 @@
   <div>
     <nav>
       <router-link to="/dashboard">Dashboard</router-link> |
-      <router-link to="/addresses">Addresses</router-link> |
-      <router-link to="/patients">Patients</router-link>
+      <router-link to="/enderecos">Endereços</router-link> |
+      <router-link to="/pacientes">Pacientes</router-link>
     </nav>
     <slot />
   </div>

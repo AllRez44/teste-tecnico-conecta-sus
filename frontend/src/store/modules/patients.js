@@ -1,4 +1,4 @@
-import {apiGetPatient, apiGetPatients, apiPostPatient} from "@/services/patients-service";
+import {apiGetPatient, apiGetPatients, apiPostPatient} from "@/services/patients.service";
 
 export const patientsStore = {
     state: () => ({
