@@ -1,4 +1,4 @@
-import {apiGetAddress, apiGetAddresses, apiPostAddress} from "@/services/addresses.service";
+import { apiGetAddress, apiGetAddresses, apiPostAddress } from "@/services/addresses.service";
 
 export const addressesStore = {
     state: () => ({
@@ -22,10 +22,10 @@ export const addressesStore = {
         }
     },
     actions: {
-        async getAddresses({ searchParams }) {
+        async getAddresses({ commit }, { searchParams } = {}) {
             try {
-                const response = await apiGetAddresses({searchParams});
-                this.commit('setAddresses', response.data);
+                const response = await apiGetAddresses({ searchParams });
+                commit('setAddresses', response.data.data);
             } catch (error) {
                 if (searchParams) {
                     console.error(`Error fetching addresses with search params: ${searchParams}\n Error:`, error);
@@ -35,19 +35,19 @@ export const addressesStore = {
                 throw error;
             }
         },
-        async getAddress({ id }) {
+        async getAddress({ commit }, { id }) {
             try {
                 const response = await apiGetAddress({ id });
-                this.commit('setAddress', response.data);
+                commit('setAddress', response.data);
             } catch (error) {
                 console.error(`Error fetching address ID ${id}: `, error);
                 throw error;
             }
         },
-        async postAddress({ patient }) {
+        async postAddress({ commit }, { patient }) {
             try {
                 const response = await apiPostAddress({ patient });
-                this.commit('setAddress', response.data);
+                commit('setAddress', response.data);
             } catch (error) {
                 console.error(`Error posting address: ${JSON.stringify(patient.toString())} \n Error:`, error);
                 throw error;

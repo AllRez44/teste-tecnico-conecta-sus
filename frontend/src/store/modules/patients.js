@@ -1,4 +1,4 @@
-import {apiGetPatient, apiGetPatients, apiPostPatient} from "@/services/patients.service";
+import { apiGetPatient, apiGetPatients, apiPostPatient } from "@/services/patients.service";
 
 export const patientsStore = {
     state: () => ({
@@ -22,10 +22,10 @@ export const patientsStore = {
         }
     },
     actions: {
-        async getPatients({ searchParams }) {
+        async getPatients({ commit }, { searchParams } = {}) {
             try {
-                const response = await apiGetPatients({searchParams});
-                this.commit('setPatients', response.data);
+                const response = await apiGetPatients({ searchParams });
+                commit('setPatients', response.data.data);
             } catch (error) {
                 if (searchParams) {
                     console.error(`Error fetching patients with search params: ${searchParams}\n Error:`, error);
@@ -35,19 +35,19 @@ export const patientsStore = {
                 throw error;
             }
         },
-        async getPatient({ id }) {
+        async getPatient({ commit }, { id }) {
             try {
                 const response = await apiGetPatient({ id });
-                this.commit('setPatient', response.data);
+                commit('setPatient', response.data);
             } catch (error) {
                 console.error(`Error fetching patient ID ${id}: `, error);
                 throw error;
             }
         },
-        async postPatient({ patient }) {
+        async postPatient({ commit }, { patient }) {
             try {
                 const response = await apiPostPatient({ patient });
-                this.commit('setPatient', response.data);
+                commit('setPatient', response.data);
             } catch (error) {
                 console.error(`Error posting patient: ${JSON.stringify(patient.toString())} \n Error:`, error);
                 throw error;
