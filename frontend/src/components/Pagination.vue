@@ -11,7 +11,7 @@
 
 <script>
 export default {
-  name: 'Pagination',
+  name: 'PaginationRow',
   inheritAttrs: false,
   props: {
     value: {
