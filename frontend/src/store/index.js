@@ -1,14 +1,15 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import {addressesStore} from "@/store/modules/addresses";
-import {patientsStore} from "@/store/modules/patients";
-import {apiGetDashboard} from "@/services/dashboard.service";
+import { addressesStore } from "@/store/modules/addresses";
+import { patientsStore } from "@/store/modules/patients";
+import { apiGetDashboard } from "@/services/dashboard.service";
 
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    isLoading: false,
     /** @type {{ total_patients: number, total_addresses: number }} **/
     summary: {}
   },
@@ -18,6 +19,9 @@ export default new Vuex.Store({
     }
   },
   mutations: {
+    setLoading(state, status) {
+      state.isLoading = status;
+    },
     setSummary(state, summary) {
       state.summary = summary;
     }

@@ -1,9 +1,11 @@
 <script setup>
 import AppLayout from "@/components/AppLayout.vue";
+import GlobalLoader from "@/components/GlobalLoader.vue";
 </script>
 
 <template>
   <div id="app">
+    <GlobalLoader v-if="$store.state.isLoading" />
     <AppLayout>
       <router-view/>
     </AppLayout>
