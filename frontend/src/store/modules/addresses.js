@@ -1,4 +1,4 @@
-import { apiGetAddress, apiGetAddresses, apiPostAddress } from "@/services/addresses.service";
+import { apiGetAddress, apiGetAddresses, apiPostAddress, apiDeleteAddress } from "@/services/addresses.service";
 
 export const addressesStore = {
     state: () => ({
@@ -19,6 +19,9 @@ export const addressesStore = {
         },
         setAddress(state, address) {
             state.address = address;
+        },
+        removeAddress(state, id) {
+            state.addresses = state.addresses.filter(a => a.id !== id);
         }
     },
     actions: {
@@ -31,7 +34,6 @@ export const addressesStore = {
                     console.error(`Error fetching addresses with search params: ${searchParams}\n Error:`, error);
                     throw error;
                 }
-                console.error(`Error fetching addresses: \n Error:`, error);
                 throw error;
             }
         },
@@ -50,6 +52,22 @@ export const addressesStore = {
                 commit('setAddress', response.data);
             } catch (error) {
                 console.error(`Error posting address: ${JSON.stringify(patient.toString())} \n Error:`, error);
+                throw error;
+            }
+        },
+        async deleteAddress({ commit, dispatch }, { id }) {
+            try {
+                await apiDeleteAddress({ id });
+                commit('removeAddress', id);
+            } catch (error) {
+                console.error(`Error deleting address ID ${id}: `, error);
+                const defaultErrorMessage = 'Erro ao excluir endereço';
+                if (error.response?.data?.errors?.address?.length) {
+                    const addressErrors = error.response?.data?.errors?.address;
+                    dispatch('showError', addressErrors[0] || defaultErrorMessage);
+                } else {
+                    dispatch('showError', defaultErrorMessage);
+                }
                 throw error;
             }
         }
