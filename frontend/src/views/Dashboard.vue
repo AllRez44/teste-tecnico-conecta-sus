@@ -50,10 +50,12 @@ import { numberFormatter } from "@/utils";
 
 export default {
   name: "DashboardView",
-  data() {
-    return {
-      patientsCount: 12450,
-      addressesCount: 8924,
+  computed: {
+    patientsCount() {
+      return this.$store.getters.totalPatientsCount;
+    },
+    addressesCount() {
+      return this.$store.getters.totalAddressesCount;
     }
   },
   methods: {
@@ -62,7 +64,10 @@ export default {
         ? numberFormatter.format(val)
         : '-';
     }
-  }
+  },
+  async beforeMount() {
+    await this.$store.dispatch('getSummary');
+  },
 }
 </script>
 
