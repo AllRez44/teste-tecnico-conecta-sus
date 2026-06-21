@@ -2,11 +2,15 @@
 
 namespace App\Repositories;
 
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 interface RepositoryInterface
 {
-    public function all(): \Illuminate\Database\Eloquent\Collection;
+    public function all(): Collection;
+
+    public function paginate(int $perPage = 10, ?string $search = null): LengthAwarePaginator;
 
     public function create(array $data): ?Model;
 

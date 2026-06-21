@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Address;
 use App\Repositories\AddressRepository;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Validation\ValidationException;
 
 class AddressService
@@ -17,6 +18,11 @@ class AddressService
     public function all(): Collection
     {
         return $this->addressRepository->all();
+    }
+
+    public function paginate(int $perPage = 10, ?string $search = null): LengthAwarePaginator
+    {
+        return $this->addressRepository->paginate($perPage, $search);
     }
 
     public function find(int $id): ?Address

@@ -7,6 +7,7 @@ use App\Http\Requests\StorePatientRequest;
 use App\Http\Requests\UpdatePatientRequest;
 use App\Services\PatientService;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class PatientController extends Controller
 {
@@ -15,9 +16,12 @@ class PatientController extends Controller
     ) {
     }
 
-    public function index(): JsonResponse
+    public function index(Request $request): JsonResponse
     {
-        $patients = $this->patientService->all();
+        $perPage = $request->get('per_page', 1510);
+        $search = $request->get('search');
+        
+        $patients = $this->patientService->paginate((int) $perPage, $search);
         return response()->json($patients);
     }
 

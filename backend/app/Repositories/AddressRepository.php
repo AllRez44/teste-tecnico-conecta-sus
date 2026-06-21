@@ -5,12 +5,26 @@ namespace App\Repositories;
 use App\Models\Address;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class AddressRepository implements RepositoryInterface
 {
     public function all(): Collection
     {
         return Address::all();
+    }
+
+    public function paginate(int $perPage = 10, ?string $search = null): LengthAwarePaginator
+    {
+        $query = Address::query();
+        if ($search) {
+            $query->where('street', 'like', "%{$search}%")
+                ->orWhere('zip_code', 'like', "%{$search}%")
+                ->orWhere('neighborhood', 'like', "%{$search}%")
+                ->orWhere('city', 'like', "%{$search}%")
+                ->orWhere('state', 'like', "%{$search}%");
+        }
+        return $query->paginate($perPage);
     }
 
     /**

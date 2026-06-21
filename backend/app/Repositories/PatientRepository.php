@@ -5,12 +5,24 @@ namespace App\Repositories;
 use App\Models\Patient;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class PatientRepository implements RepositoryInterface
 {
     public function all(): Collection
     {
         return Patient::all();
+    }
+
+    public function paginate(int $perPage = 10, ?string $search = null): LengthAwarePaginator
+    {
+        $query = Patient::query();
+        if ($search) {
+            $query->where('name', 'like', "%{$search}%")
+                ->orWhere('cpf', 'like', "%{$search}%")
+                ->orWhere('cns', 'like', "%{$search}%");
+        }
+        return $query->paginate($perPage);
     }
 
     /**

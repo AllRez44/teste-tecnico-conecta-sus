@@ -7,6 +7,7 @@ use App\Http\Requests\StoreAddressRequest;
 use App\Http\Requests\UpdateAddressRequest;
 use App\Services\AddressService;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class AddressController extends Controller
 {
@@ -15,9 +16,12 @@ class AddressController extends Controller
     ) {
     }
 
-    public function index(): JsonResponse
+    public function index(Request $request): JsonResponse
     {
-        $addresses = $this->addressService->all();
+        $perPage = $request->get('per_page', 10);
+        $search = $request->get('search');
+        
+        $addresses = $this->addressService->paginate((int) $perPage, $search);
         return response()->json($addresses);
     }
 

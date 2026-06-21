@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Patient;
 use App\Repositories\PatientRepository;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class PatientService
 {
@@ -16,6 +17,11 @@ class PatientService
     public function all(): Collection
     {
         return $this->patientRepository->all();
+    }
+
+    public function paginate(int $perPage = 10, ?string $search = null): LengthAwarePaginator
+    {
+        return $this->patientRepository->paginate($perPage, $search);
     }
 
     public function find(int $id): ?Patient
