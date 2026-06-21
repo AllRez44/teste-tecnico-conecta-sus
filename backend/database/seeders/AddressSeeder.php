@@ -46,6 +46,13 @@ class AddressSeeder extends Seeder
                 'neighborhood' => 'Centro',
                 'city' => 'Rio de Janeiro',
                 'state' => 'RJ',
+            ],
+            [
+                'street' => 'Av. Paulista, 1578',
+                'zip_code' => '01310200',
+                'neighborhood' => 'Bela Vista',
+                'city' => 'São Paulo',
+                'state' => 'SP',
             ]
         ];
 
