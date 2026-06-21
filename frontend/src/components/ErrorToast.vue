@@ -1,14 +1,13 @@
 <template>
-  <div class="position-fixed" style="bottom: 20px; right: 20px; z-index: 1050;">
-    <b-toast 
-      v-model="hasError" 
-      variant="danger" 
-      solid
-      title="Erro"
-    >
-      {{ errorMessage }}
-    </b-toast>
-  </div>
+  <b-toast 
+    v-model="hasError" 
+    variant="danger" 
+    solid
+    toaster="b-toaster-bottom-right"
+    title="Erro"
+  >
+    {{ errorMessage }}
+  </b-toast>
 </template>
 
 <script>
