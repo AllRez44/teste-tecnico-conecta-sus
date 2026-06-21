@@ -10,6 +10,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     isLoading: false,
+    errorMessage: null,
     /** @type {{ total_patients: number, total_addresses: number }} **/
     summary: {},
     /** @type {{ [key: string]: { totalRows: undefined } }} **/
@@ -22,6 +23,9 @@ export default new Vuex.Store({
   mutations: {
     setLoading(state, status) {
       state.isLoading = status;
+    },
+    setErrorMessage(state, message) {
+      state.errorMessage = message;
     },
     setSummary(state, summary) {
       state.summary = summary;
@@ -43,6 +47,9 @@ export default new Vuex.Store({
         throw error;
       }
     },
+    showError({ commit }, message) {
+      commit('setErrorMessage', message);
+    }
   },
   modules: {
     addresses: addressesStore,
