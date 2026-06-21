@@ -13,7 +13,9 @@
               <div class="text-muted font-weight-bold text-uppercase mb-3" style="font-size: 0.85rem; letter-spacing: 0.5px;">
                 Total de Pacientes
               </div>
-              <h1 class="font-weight-bold text-dark mb-0" style="font-size: 2.5rem;">12.450</h1>
+              <h1 class="font-weight-bold text-dark mb-0" style="font-size: 2.5rem;">
+                {{ formatNumber(patientsCount) }}
+              </h1>
             </div>
             <div class="icon-box icon-blue">
               <b-icon icon="person" font-scale="1.4"></b-icon>
@@ -29,7 +31,9 @@
               <div class="text-muted font-weight-bold text-uppercase mb-3" style="font-size: 0.85rem; letter-spacing: 0.5px;">
                 Total de Endereços
               </div>
-              <h1 class="font-weight-bold text-dark mb-0" style="font-size: 2.5rem;">8.924</h1>
+              <h1 class="font-weight-bold text-dark mb-0" style="font-size: 2.5rem;">
+                {{ formatNumber(addressesCount) }}
+              </h1>
             </div>
             <div class="icon-box icon-orange">
               <b-icon icon="geo-alt" font-scale="1.3"></b-icon>
@@ -42,8 +46,23 @@
 </template>
 
 <script>
+import { numberFormatter } from "@/utils";
+
 export default {
-  name: "DashboardView"
+  name: "DashboardView",
+  data() {
+    return {
+      patientsCount: 12450,
+      addressesCount: 8924,
+    }
+  },
+  methods: {
+    formatNumber(val) {
+      return val !== undefined 
+        ? numberFormatter.format(val)
+        : '-';
+    }
+  }
 }
 </script>
 
