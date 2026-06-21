@@ -1,6 +1,6 @@
 <script>
 import PageHeader from "@/components/PageHeader.vue";
-import PageLayout from "@/components/PageLayout.vue";
+import PageLayout from "@/components/layouts/PageLayout.vue";
 
 export default {
   name: "PatientsView",

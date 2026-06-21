@@ -1,5 +1,5 @@
 <script setup>
-import AppLayout from "@/components/AppLayout.vue";
+import AppLayout from "@/components/layouts/AppLayout.vue";
 import GlobalLoader from "@/components/GlobalLoader.vue";
 </script>
 
