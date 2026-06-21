@@ -8,8 +8,11 @@ import router from './router'
 import store from './store'
 import {ValidationProvider, ValidationObserver, extend} from 'vee-validate';
 import {required} from "vee-validate/dist/rules";
+import VueMask from 'v-mask';
 
 Vue.config.productionTip = false
+
+Vue.use(VueMask);
 
 extend('required', {
   ...required,
