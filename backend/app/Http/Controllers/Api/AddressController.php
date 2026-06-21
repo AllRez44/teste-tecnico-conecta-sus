@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateAddressRequest;
 use App\Services\AddressService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class AddressController extends Controller
 {
@@ -28,6 +29,7 @@ class AddressController extends Controller
     public function store(StoreAddressRequest $request): JsonResponse
     {
         $address = $this->addressService->store($request->validated());
+        Log::info('Address created successfully', ['address_id' => $address->id ?? null, 'data' => $request->validated()]);
         return response()->json($address, 201);
     }
 
@@ -43,12 +45,14 @@ class AddressController extends Controller
     public function update(UpdateAddressRequest $request, int $id): JsonResponse
     {
         $this->addressService->update($id, $request->validated());
+        Log::info('Address updated successfully', ['address_id' => $id, 'data' => $request->validated()]);
         return response()->json($this->addressService->find($id));
     }
 
     public function destroy(int $id): JsonResponse
     {
         $this->addressService->delete($id);
+        Log::info('Address deleted successfully', ['address_id' => $id]);
         return response()->json(null, 204);
     }
 }
