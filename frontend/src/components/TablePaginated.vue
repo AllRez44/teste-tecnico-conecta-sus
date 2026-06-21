@@ -49,20 +49,18 @@ export default {
       type: Array,
       required: true
     },
-    currentPage: {
-      type: Number,
-      required: true
-    },
     totalRows: {
       type: Number,
       required: true
-    },
-    perPage: {
-      type: Number,
-      default: 10
     }
   },
   computed: {
+    perPage() {
+      return Number(this.$route.query.per_page) || 10;
+    },
+    currentPage() {
+      return Number(this.$route.query.page) || 1;
+    },
     showingFrom() {
       if (this.totalRows === 0) return 0;
       return (this.currentPage - 1) * this.perPage + 1;
@@ -73,8 +71,6 @@ export default {
   },
   methods: {
     handlePageChange(page) {
-      this.$emit('update:currentPage', page);
-
       if (this.$route.query.page !== String(page)) {
         this.$router.push({
           query: {
