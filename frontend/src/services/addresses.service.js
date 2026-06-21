@@ -13,8 +13,8 @@ export const apiGetAddress = async({ id }) => {
     return api.get('/addresses/' + id);
 }
 
-export const apiPostAddress = async({ addresses }) => {
-    return await api.post('/addresses', addresses);
+export const apiPostAddress = async({ address }) => {
+    return await api.post('/addresses', address);
 }
 
 export const apiDeleteAddress = async({ id }) => {
