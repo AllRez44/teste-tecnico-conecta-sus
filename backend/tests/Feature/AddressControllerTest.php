@@ -7,6 +7,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\Address;
 use App\Models\Patient;
+use Illuminate\Support\Facades\Log;
 
 class AddressControllerTest extends TestCase
 {
@@ -66,6 +67,10 @@ class AddressControllerTest extends TestCase
             'state' => 'SP',
         ];
 
+        Log::shouldReceive('info')
+            ->once()
+            ->with('Address created successfully', \Mockery::type('array'));
+
         $response = $this->postJson('/api/addresses', $payload);
 
         $response->assertStatus(201)
@@ -97,6 +102,10 @@ class AddressControllerTest extends TestCase
             'state' => 'RJ',
         ];
 
+        Log::shouldReceive('info')
+            ->once()
+            ->with('Address updated successfully', \Mockery::type('array'));
+
         $response = $this->putJson("/api/addresses/{$address->id}", $payload);
 
         $response->assertStatus(200)
@@ -108,6 +117,10 @@ class AddressControllerTest extends TestCase
     public function test_can_delete_address_without_patients()
     {
         $address = Address::factory()->create();
+
+        Log::shouldReceive('info')
+            ->once()
+            ->with('Address deleted successfully', \Mockery::type('array'));
 
         $response = $this->deleteJson("/api/addresses/{$address->id}");
 

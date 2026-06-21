@@ -7,6 +7,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\Address;
 use App\Models\Patient;
+use Illuminate\Support\Facades\Log;
 
 class PatientControllerTest extends TestCase
 {
@@ -106,6 +107,10 @@ class PatientControllerTest extends TestCase
             'address_id' => $address->id,
         ];
 
+        Log::shouldReceive('info')
+            ->once()
+            ->with('Patient created successfully', \Mockery::type('array'));
+
         $response = $this->postJson('/api/patients', $payload);
 
         $response->assertStatus(201)
@@ -193,6 +198,10 @@ class PatientControllerTest extends TestCase
             'address_id' => $address->id,
         ];
 
+        Log::shouldReceive('info')
+            ->once()
+            ->with('Patient updated successfully', \Mockery::type('array'));
+
         $response = $this->putJson("/api/patients/{$patient->id}", $payload);
 
         $response->assertStatus(200)
@@ -257,6 +266,10 @@ class PatientControllerTest extends TestCase
             'cpf' => $this->generateValidCpf(),
             'cns' => $this->generateValidCns(),
         ]);
+
+        Log::shouldReceive('info')
+            ->once()
+            ->with('Patient deleted successfully', \Mockery::type('array'));
 
         $response = $this->deleteJson("/api/patients/{$patient->id}");
 
