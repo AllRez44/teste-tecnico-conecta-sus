@@ -11,7 +11,9 @@ export default new Vuex.Store({
   state: {
     isLoading: false,
     /** @type {{ total_patients: number, total_addresses: number }} **/
-    summary: {}
+    summary: {},
+    /** @type {{ [key: string]: { totalRows: undefined } }} **/
+    pagination: {},
   },
   getters: {
     totalPatientsCount: (state) => state.summary.total_patients,
@@ -23,7 +25,13 @@ export default new Vuex.Store({
     },
     setSummary(state, summary) {
       state.summary = summary;
-    }
+    },
+    setTotalRows(state, { module, totalRows }) {
+      if (!state.pagination[module]) {
+        Vue.set(state.pagination, module, {});
+      }
+      Vue.set(state.pagination[module], 'totalRows', totalRows);
+    },
   },
   actions: {
     async getSummary({ commit }) {
@@ -38,6 +46,6 @@ export default new Vuex.Store({
   },
   modules: {
     addresses: addressesStore,
-    patient: patientsStore,
+    patients: patientsStore,
   }
 })
