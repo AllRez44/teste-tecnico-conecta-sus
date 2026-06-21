@@ -12,12 +12,6 @@ export const patientsStore = {
         patient: {},
     }),
     getters: {
-        getAllPatients() {
-            return this.patients;
-        },
-        getPatient() {
-            return this.patient;
-        }
     },
     mutations: {
         setPatients(state, patients) {

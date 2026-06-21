@@ -14,9 +14,6 @@ export default new Vuex.Store({
     summary: {}
   },
   getters: {
-    getSummary() {
-      return this.summary;
-    }
   },
   mutations: {
     setLoading(state, status) {

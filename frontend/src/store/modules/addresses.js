@@ -12,12 +12,6 @@ export const addressesStore = {
         address: {},
     }),
     getters: {
-        getAllAddresses() {
-            return this.addresses;
-        },
-        getAddress() {
-            return this.address;
-        }
     },
     mutations: {
         setAddresses(state, addresses) {
