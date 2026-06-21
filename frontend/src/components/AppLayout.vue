@@ -19,23 +19,23 @@
         <b-nav-item 
           to="/dashboard"
           active-class="active bg-primary"
-          :link-classes="$route.path.startsWith('/dashboard') ? 'text-light' : 'text-dark'"
+          :link-classes="['d-flex', 'align-items-center', $route.path.startsWith('/dashboard') ? 'text-light' : 'text-dark']"
         >
-          Painel
-        </b-nav-item>
-        <b-nav-item
-          to="/enderecos"
-          active-class="active bg-primary"
-          :link-classes="$route.path.startsWith('/enderecos') ? 'text-light' : 'text-dark'"
-        >
-          Endereços
+          <b-icon icon="grid" class="mr-3 h5 mb-0"></b-icon> Painel
         </b-nav-item>
         <b-nav-item 
           to="/pacientes" 
           active-class="active bg-primary"
-          :link-classes="$route.path.startsWith('/pacientes') ? 'text-light' : 'text-dark'"
+          :link-classes="['d-flex', 'align-items-center', $route.path.startsWith('/pacientes') ? 'text-light' : 'text-dark']"
         >
-          Pacientes
+          <b-icon icon="person" class="mr-3 h5 mb-0"></b-icon> Pacientes
+        </b-nav-item>
+        <b-nav-item
+          to="/enderecos"
+          active-class="active bg-primary"
+          :link-classes="['d-flex', 'align-items-center', $route.path.startsWith('/enderecos') ? 'text-light' : 'text-dark']"
+        >
+          <b-icon icon="geo-alt" class="mr-3 h5 mb-0"></b-icon> Endereços
         </b-nav-item>
       </b-nav>
     </b-sidebar>
