@@ -39,10 +39,10 @@ export default {
   },
   methods: {
     handleNewPatient() {
-      console.log('Novo Paciente');
+      this.$router.push({ name: 'pacientes-form' });
     },
     handleEdit(item) {
-      console.log('Editar Paciente', item);
+      this.$router.push({ name: 'pacientes-form', params: { id: item.id } });
     },
     handleDelete(item) {
       this.itemToDelete = item;

@@ -40,10 +40,10 @@ export default {
   },
   methods: {
     handleNewAddress() {
-      console.log('Novo Endereço');
+      this.$router.push({ name: 'enderecos-form' });
     },
     handleEdit(item) {
-      console.log('Editar', item);
+      this.$router.push({ name: 'enderecos-form', params: { id: item.id } });
     },
     handleDelete(item) {
       this.itemToDelete = item;
