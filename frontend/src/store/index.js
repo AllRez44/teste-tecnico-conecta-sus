@@ -14,6 +14,8 @@ export default new Vuex.Store({
     summary: {}
   },
   getters: {
+    totalPatientsCount: (state) => state.summary.total_patients,
+    totalAddressesCount: (state) => state.summary.total_addresses,
   },
   mutations: {
     setLoading(state, status) {
