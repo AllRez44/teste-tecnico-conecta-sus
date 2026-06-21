@@ -32,4 +32,38 @@ class StoreAddressRequest extends FormRequest
       'state' => 'required|string|size:2|uf',
     ];
   }
+
+  /**
+   * Get the error messages for the defined validation rules.
+   *
+   * @return array
+   */
+  public function messages()
+  {
+    return [
+      'required' => 'O campo :attribute é obrigatório.',
+      'string' => 'O campo :attribute deve ser um texto.',
+      'max' => 'O campo :attribute não pode ter mais que :max caracteres.',
+      'size' => 'O campo :attribute deve ter exatamente :size caracteres.',
+      'regex' => 'O formato do campo :attribute é inválido.',
+      'uf' => 'A UF informada é inválida.',
+    ];
+  }
+
+  /**
+   * Get custom attributes for validator errors.
+   *
+   * @return array
+   */
+  public function attributes()
+  {
+    return [
+      'name' => 'nome',
+      'street' => 'rua',
+      'zip_code' => 'CEP',
+      'neighborhood' => 'bairro',
+      'city' => 'cidade',
+      'state' => 'estado',
+    ];
+  }
 }
