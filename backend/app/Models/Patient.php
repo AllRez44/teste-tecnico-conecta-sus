@@ -26,6 +26,15 @@ class Patient extends Model
     ];
 
     /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'address_id' => 'integer',
+    ];
+
+    /**
      * Indicates if the model should be timestamped.
      *
      * @var bool
