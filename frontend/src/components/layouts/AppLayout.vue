@@ -57,6 +57,7 @@
         <slot />
       </div>
 
+      <SuccessToast />
       <ErrorToast />
     </div>
   </div>
@@ -65,12 +66,14 @@
 <script>
 import SearchBar from '@/components/SearchBar.vue';
 import ErrorToast from '@/components/ErrorToast.vue';
+import SuccessToast from '@/components/SuccessToast.vue';
 
 export default {
   name: 'AppLayout',
   components: {
     SearchBar,
-    ErrorToast
+    ErrorToast,
+    SuccessToast
   },
   methods: {
     handleSearch(value) {
