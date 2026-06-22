@@ -18,8 +18,8 @@
           </ValidationProvider>
         </b-col>
         <b-col md="6">
-          <ValidationProvider name="Data de Nascimento" rules="required" v-slot="{ errors }">
-            <BaseInput id="birth_date" label="Data de Nascimento *" type="date" v-model="form.birth_date" required :error="errors[0] || getError('birth_date')" />
+          <ValidationProvider name="Data de Nascimento" rules="required|past_or_today" v-slot="{ errors }">
+            <BaseInput id="birth_date" label="Data de Nascimento *" type="date" v-model="form.birth_date" :max="maxDate" required :error="errors[0] || getError('birth_date')" />
           </ValidationProvider>
         </b-col>
         <b-col md="6">
@@ -69,7 +69,14 @@ export default {
     }
   },
   data() {
+    const today = new Date();
+    const dd = String(today.getDate()).padStart(2, '0');
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const yyyy = today.getFullYear();
+    const maxDate = `${yyyy}-${mm}-${dd}`;
+
     return {
+      maxDate,
       form: {
         name: '',
         cpf: '',
