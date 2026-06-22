@@ -8,13 +8,13 @@
           </ValidationProvider>
         </b-col>
         <b-col md="6">
-          <ValidationProvider name="CPF" rules="required" v-slot="{ errors }">
+          <ValidationProvider name="CPF" rules="required|digits:11" mode="lazy" v-slot="{ errors }">
             <BaseInput id="cpf" label="CPF *" placeholder="000.000.000-00" v-model="form.cpf" required mask="###.###.###-##" :error="errors[0] || getError('cpf')" />
           </ValidationProvider>
         </b-col>
         <b-col md="6">
-          <ValidationProvider name="CNS" rules="required" v-slot="{ errors }">
-            <BaseInput id="cns" label="CNS (Cartão Nacional de Saúde)" placeholder="000 0000 0000 0000" v-model="form.cns" required mask="### #### #### ####" :error="errors[0] || getError('cns')" />
+          <ValidationProvider name="CNS" rules="required|digits:15" mode="lazy" v-slot="{ errors }">
+            <BaseInput id="cns" label="CNS (Cartão Nacional de Saúde) *" placeholder="000 0000 0000 0000" v-model="form.cns" required mask="### #### #### ####" :error="errors[0] || getError('cns')" />
           </ValidationProvider>
         </b-col>
         <b-col md="6">
@@ -35,7 +35,7 @@
           </ValidationProvider>
         </b-col>
         <b-col md="6">
-          <ValidationProvider name="Telefone" v-slot="{ errors }">
+          <ValidationProvider name="Telefone" rules="digits:11" mode="lazy" v-slot="{ errors }">
             <BaseInput id="phone" label="Telefone" placeholder="(00) 00000-0000" v-model="form.phone" mask="(##) #####-####" :error="errors[0] || getError('phone')" />
           </ValidationProvider>
         </b-col>

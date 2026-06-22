@@ -3,7 +3,7 @@
     <BaseForm @submit="handleValidate(handleSubmit)" @cancel="$emit('cancel')">
       <b-row>
         <b-col md="6">
-          <ValidationProvider name="CEP" rules="required" v-slot="{ errors }">
+          <ValidationProvider name="CEP" rules="required|digits:8" mode="lazy" v-slot="{ errors }">
             <BaseInput id="zip_code" label="CEP" placeholder="Ex: 01310-200" v-model="form.zip_code" required mask="#####-###" @keyup.native="handleCepInput" :error="errors[0]" />
           </ValidationProvider>
         </b-col>
