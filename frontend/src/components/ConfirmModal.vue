@@ -7,6 +7,7 @@
     cancel-title="Cancelar"
     ok-title="Confirmar"
     ok-variant="primary"
+    centered
   >
     <p class="my-4">{{ message }}</p>
   </b-modal>
