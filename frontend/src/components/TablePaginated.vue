@@ -6,6 +6,10 @@
       class="mb-0 custom-table"
       head-variant="light"
       tbody-tr-class="align-middle"
+      no-local-sorting
+      :sort-by="sortBy"
+      :sort-desc="sortDesc"
+      @sort-changed="handleSortChange"
       v-bind="$attrs"
       v-on="$listeners"
     >
@@ -67,6 +71,12 @@ export default {
     },
     showingTo() {
       return Math.min(this.currentPage * this.perPage, this.totalRows);
+    },
+    sortBy() {
+      return this.$route.query.order_by || '';
+    },
+    sortDesc() {
+      return this.$route.query.order_dir === 'desc';
     }
   },
   methods: {
@@ -78,6 +88,21 @@ export default {
             page: page
           }
         }).catch(() => {});
+      }
+    },
+    handleSortChange(ctx) {
+      const query = { ...this.$route.query };
+      
+      if (ctx.sortBy) {
+        query.order_by = ctx.sortBy;
+        query.order_dir = ctx.sortDesc ? 'desc' : 'asc';
+      } else {
+        delete query.order_by;
+        delete query.order_dir;
+      }
+      
+      if (this.$route.query.order_by !== query.order_by || this.$route.query.order_dir !== query.order_dir) {
+        this.$router.push({ query }).catch(() => {});
       }
     }
   }
