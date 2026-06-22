@@ -42,8 +42,10 @@ export default {
       try {
         if (this.isEdit) {
           await this.$store.dispatch('putAddress', { id: this.$route.params.id, address: addressData });
+          this.$store.dispatch('showSuccess', 'Endereço atualizado com sucesso.');
         } else {
           await this.$store.dispatch('postAddress', { address: addressData });
+          this.$store.dispatch('showSuccess', 'Endereço criado com sucesso.');
         }
         this.$router.push({ name: 'enderecos' });
       } catch (error) {

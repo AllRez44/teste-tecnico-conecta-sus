@@ -48,8 +48,10 @@ export default {
       try {
         if (this.isEdit) {
           await this.$store.dispatch('putPatient', { id: this.$route.params.id, patient: patientData });
+          this.$store.dispatch('showSuccess', 'Paciente atualizado com sucesso.');
         } else {
           await this.$store.dispatch('postPatient', { patient: patientData });
+          this.$store.dispatch('showSuccess', 'Paciente criado com sucesso.');
         }
         this.$router.push({ name: 'pacientes' });
       } catch (error) {
