@@ -11,6 +11,7 @@ export default new Vuex.Store({
   state: {
     isLoading: false,
     errorMessage: null,
+    successMessage: null,
     /** @type {{ total_patients: number, total_addresses: number }} **/
     summary: {},
     /** @type {{ [key: string]: { totalRows: undefined } }} **/
@@ -26,6 +27,9 @@ export default new Vuex.Store({
     },
     setErrorMessage(state, message) {
       state.errorMessage = message;
+    },
+    setSuccessMessage(state, message) {
+      state.successMessage = message;
     },
     setSummary(state, summary) {
       state.summary = summary;
@@ -49,6 +53,9 @@ export default new Vuex.Store({
     },
     showError({ commit }, message) {
       commit('setErrorMessage', message);
+    },
+    showSuccess({ commit }, message) {
+      commit('setSuccessMessage', message);
     }
   },
   modules: {
