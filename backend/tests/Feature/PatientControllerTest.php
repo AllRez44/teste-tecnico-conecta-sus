@@ -298,4 +298,26 @@ class PatientControllerTest extends TestCase
 
         $response->assertStatus(404);
     }
+
+    public function test_can_order_patients()
+    {
+        $address = Address::factory()->create();
+        Patient::factory()->create(['name' => 'Zenão', 'address_id' => $address->id, 'cpf' => $this->generateValidCpf(), 'cns' => $this->generateValidCns()]);
+        Patient::factory()->create(['name' => 'Sócrates', 'address_id' => $address->id, 'cpf' => $this->generateValidCpf(), 'cns' => $this->generateValidCns()]);
+        Patient::factory()->create(['name' => 'Aristóteles', 'address_id' => $address->id, 'cpf' => $this->generateValidCpf(), 'cns' => $this->generateValidCns()]);
+
+        $responseAsc = $this->getJson('/api/patients?order_by=name&order_dir=asc');
+        $responseAsc->assertStatus(200);
+        $dataAsc = $responseAsc->json('data');
+        $this->assertEquals('Aristóteles', $dataAsc[0]['name']);
+        $this->assertEquals('Sócrates', $dataAsc[1]['name']);
+        $this->assertEquals('Zenão', $dataAsc[2]['name']);
+
+        $responseDesc = $this->getJson('/api/patients?order_by=name&order_dir=desc');
+        $responseDesc->assertStatus(200);
+        $dataDesc = $responseDesc->json('data');
+        $this->assertEquals('Zenão', $dataDesc[0]['name']);
+        $this->assertEquals('Sócrates', $dataDesc[1]['name']);
+        $this->assertEquals('Aristóteles', $dataDesc[2]['name']);
+    }
 }
