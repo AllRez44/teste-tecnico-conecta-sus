@@ -28,12 +28,12 @@ export default {
   data() {
     return {
       fields: [
-        { key: 'zip_code', label: 'CEP', thClass: 'font-weight-bold text-dark' },
-        { key: 'street', label: 'Logradouro', thClass: 'font-weight-bold text-dark' },
-        { key: 'neighborhood', label: 'Bairro', thClass: 'font-weight-bold text-dark' },
-        { key: 'city', label: 'Cidade', thClass: 'font-weight-bold text-dark' },
-        { key: 'state', label: 'UF', thClass: 'font-weight-bold text-dark' },
-        { key: 'acoes', label: 'Ações', thClass: 'font-weight-bold text-dark text-right', tdClass: 'text-right' }
+        { key: 'zip_code', label: 'CEP', sortable: true, thClass: 'font-weight-bold text-dark', tdClass: 'align-middle' },
+        { key: 'street', label: 'Logradouro', sortable: true, thClass: 'font-weight-bold text-dark', tdClass: 'align-middle text-truncate', style: 'max-width: 250px;' },
+        { key: 'neighborhood', label: 'Bairro', sortable: true, thClass: 'font-weight-bold text-dark', tdClass: 'align-middle text-truncate', style: 'max-width: 200px;' },
+        { key: 'city', label: 'Cidade', sortable: true, thClass: 'font-weight-bold text-dark', tdClass: 'align-middle' },
+        { key: 'state', label: 'UF', sortable: true, thClass: 'font-weight-bold text-dark', tdClass: 'align-middle' },
+        { key: 'acoes', label: 'Ações', thClass: 'font-weight-bold text-dark text-right', tdClass: 'text-right align-middle' }
       ],
       itemToDelete: null
     }
@@ -68,6 +68,8 @@ export default {
   watch: {
     '$route.query.page': 'fetchAddresses',
     '$route.query.search': 'fetchAddresses',
+    '$route.query.order_by': 'fetchAddresses',
+    '$route.query.order_dir': 'fetchAddresses',
   },
   async beforeMount() {
     await this.fetchAddresses();

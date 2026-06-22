@@ -28,10 +28,10 @@ export default {
   data() {
     return {
       fields: [
-        { key: 'name', label: 'Nome', thClass: 'font-weight-bold text-dark' },
-        { key: 'cpf', label: 'CPF', thClass: 'font-weight-bold text-dark' },
-        { key: 'cns', label: 'CNS', thClass: 'font-weight-bold text-dark' },
-        { key: 'birth_date', label: 'Data de Nascimento', thClass: 'font-weight-bold text-dark' },
+        { key: 'name', label: 'Nome', sortable: true, thClass: 'font-weight-bold text-dark' },
+        { key: 'cpf', label: 'CPF', sortable: true, thClass: 'font-weight-bold text-dark' },
+        { key: 'cns', label: 'CNS', sortable: true, thClass: 'font-weight-bold text-dark' },
+        { key: 'birth_date', label: 'Data de Nascimento', sortable: true, thClass: 'font-weight-bold text-dark' },
         { key: 'acoes', label: 'Ações', thClass: 'font-weight-bold text-dark text-right', tdClass: 'text-right' }
       ],
       itemToDelete: null
@@ -69,6 +69,8 @@ export default {
   watch: {
     '$route.query.page': 'fetchPatients',
     '$route.query.search': 'fetchPatients',
+    '$route.query.order_by': 'fetchPatients',
+    '$route.query.order_dir': 'fetchPatients',
   },
   async beforeMount() {
     await this.fetchPatients();
