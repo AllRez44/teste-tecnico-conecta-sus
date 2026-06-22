@@ -9,7 +9,9 @@ const api = axios.create({
 
 api.interceptors.request.use(
   (config) => {
-    store.commit('setLoading', true);
+    if (!config.silent) {
+      store.commit('setLoading', true);
+    }
     return config;
   },
   (error) => {
@@ -20,11 +22,15 @@ api.interceptors.request.use(
 
 api.interceptors.response.use(
   (response) => {
-    store.commit('setLoading', false);
+    if (!response.config.silent) {
+      store.commit('setLoading', false);
+    }
     return response;
   },
   (error) => {
-    store.commit('setLoading', false);
+    if (!error.config || !error.config.silent) {
+      store.commit('setLoading', false);
+    }
     if (error.response) {
       console.error(`[API Error] Status: ${error.response.status}`, error.response.data);
     } else if (error.request) {
