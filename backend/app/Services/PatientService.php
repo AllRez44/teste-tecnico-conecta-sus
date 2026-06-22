@@ -19,9 +19,9 @@ class PatientService
         return $this->patientRepository->all();
     }
 
-    public function paginate(int $perPage = 10, ?string $search = null): LengthAwarePaginator
+    public function paginate(int $perPage = 10, ?string $search = null, ?string $orderBy = null, ?string $orderDir = 'asc'): LengthAwarePaginator
     {
-        return $this->patientRepository->paginate($perPage, $search);
+        return $this->patientRepository->paginate($perPage, $search, $orderBy, $orderDir);
     }
 
     public function find(int $id): ?Patient

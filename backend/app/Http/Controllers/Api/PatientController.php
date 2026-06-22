@@ -21,8 +21,10 @@ class PatientController extends Controller
     {
         $perPage = $request->get('per_page', 1510);
         $search = $request->get('search');
+        $orderBy = $request->get('order_by');
+        $orderDir = $request->get('order_dir', 'asc');
         
-        $patients = $this->patientService->paginate((int) $perPage, $search);
+        $patients = $this->patientService->paginate((int) $perPage, $search, $orderBy, $orderDir);
         return response()->json($patients);
     }
 

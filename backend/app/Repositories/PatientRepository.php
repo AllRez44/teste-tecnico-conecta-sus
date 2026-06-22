@@ -14,13 +14,16 @@ class PatientRepository implements RepositoryInterface
         return Patient::all();
     }
 
-    public function paginate(int $perPage = 10, ?string $search = null): LengthAwarePaginator
+    public function paginate(int $perPage = 10, ?string $search = null, ?string $orderBy = null, ?string $orderDir = 'asc'): LengthAwarePaginator
     {
         $query = Patient::query();
         if ($search) {
             $query->where('name', 'like', "%{$search}%")
                 ->orWhere('cpf', 'like', "%{$search}%")
                 ->orWhere('cns', 'like', "%{$search}%");
+        }
+        if ($orderBy) {
+            $query->orderBy($orderBy, $orderDir);
         }
         return $query->paginate($perPage);
     }

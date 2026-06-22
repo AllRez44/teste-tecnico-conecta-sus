@@ -21,8 +21,10 @@ class AddressController extends Controller
     {
         $perPage = $request->get('per_page', 10);
         $search = $request->get('search');
+        $orderBy = $request->get('order_by');
+        $orderDir = $request->get('order_dir', 'asc');
         
-        $addresses = $this->addressService->paginate((int) $perPage, $search);
+        $addresses = $this->addressService->paginate((int) $perPage, $search, $orderBy, $orderDir);
         return response()->json($addresses);
     }
 

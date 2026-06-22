@@ -14,7 +14,7 @@ class AddressRepository implements RepositoryInterface
         return Address::all();
     }
 
-    public function paginate(int $perPage = 10, ?string $search = null): LengthAwarePaginator
+    public function paginate(int $perPage = 10, ?string $search = null, ?string $orderBy = null, ?string $orderDir = 'asc'): LengthAwarePaginator
     {
         $query = Address::query();
         if ($search) {
@@ -23,6 +23,9 @@ class AddressRepository implements RepositoryInterface
                 ->orWhere('neighborhood', 'like', "%{$search}%")
                 ->orWhere('city', 'like', "%{$search}%")
                 ->orWhere('state', 'like', "%{$search}%");
+        }
+        if ($orderBy) {
+            $query->orderBy($orderBy, $orderDir);
         }
         return $query->paginate($perPage);
     }

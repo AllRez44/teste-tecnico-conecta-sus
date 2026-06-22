@@ -20,9 +20,9 @@ class AddressService
         return $this->addressRepository->all();
     }
 
-    public function paginate(int $perPage = 10, ?string $search = null): LengthAwarePaginator
+    public function paginate(int $perPage = 10, ?string $search = null, ?string $orderBy = null, ?string $orderDir = 'asc'): LengthAwarePaginator
     {
-        return $this->addressRepository->paginate($perPage, $search);
+        return $this->addressRepository->paginate($perPage, $search, $orderBy, $orderDir);
     }
 
     public function find(int $id): ?Address
