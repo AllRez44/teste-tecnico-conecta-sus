@@ -21,8 +21,8 @@ class PatientSeeder extends Seeder
         $defaultPatients = [
             [
                 'name' => 'Maria da Silva',
-                'cpf' => '12345678901',
-                'cns' => '123456789012345',
+                'cpf' => '71239832036',
+                'cns' => '768951627209811',
                 'birth_date' => '1985-03-15',
                 'gender' => 'F',
                 'phone' => null,
@@ -30,7 +30,7 @@ class PatientSeeder extends Seeder
             [
                 'name' => 'João Carlos Oliveira',
                 'cpf' => '98765432100',
-                'cns' => '987654321098765',
+                'cns' => '960376224664925',
                 'birth_date' => '1972-07-22',
                 'gender' => 'M',
                 'phone' => null,
@@ -38,7 +38,7 @@ class PatientSeeder extends Seeder
             [
                 'name' => 'Ana Paula Rodrigues',
                 'cpf' => '45678912300',
-                'cns' => '456789123004567',
+                'cns' => '722009133800745',
                 'birth_date' => '1990-11-08',
                 'gender' => 'F',
                 'phone' => null,
@@ -46,7 +46,7 @@ class PatientSeeder extends Seeder
             [
                 'name' => 'Carlos E. Mendes',
                 'cpf' => '32165498700',
-                'cns' => '321654987003216',
+                'cns' => '732867234487951',
                 'birth_date' => '1968-01-30',
                 'gender' => 'M',
                 'phone' => null,
@@ -54,7 +54,7 @@ class PatientSeeder extends Seeder
             [
                 'name' => 'Fernanda Silva',
                 'cpf' => '05758452874',
-                'cns' => '142784825630001',
+                'cns' => '934035426726800',
                 'birth_date' => '1995-05-12',
                 'gender' => 'F',
                 'phone' => '11988887777',
@@ -62,7 +62,7 @@ class PatientSeeder extends Seeder
             [
                 'name' => 'Rafael Costa',
                 'cpf' => '26526644333',
-                'cns' => '188875422270005',
+                'cns' => '794907765601398',
                 'birth_date' => '1982-10-25',
                 'gender' => 'M',
                 'phone' => '21977776666',
@@ -70,7 +70,7 @@ class PatientSeeder extends Seeder
             [
                 'name' => 'Beatriz Santos',
                 'cpf' => '50745595537',
-                'cns' => '190489771790003',
+                'cns' => '901843614305994',
                 'birth_date' => '2001-02-14',
                 'gender' => 'F',
                 'phone' => '31966665555',
@@ -78,7 +78,7 @@ class PatientSeeder extends Seeder
             [
                 'name' => 'Lucas Almeida',
                 'cpf' => '91623159350',
-                'cns' => '184925614440002',
+                'cns' => '768662821570218',
                 'birth_date' => '1979-08-05',
                 'gender' => 'M',
                 'phone' => '41955554444',
@@ -86,7 +86,7 @@ class PatientSeeder extends Seeder
             [
                 'name' => 'Juliana Ferreira',
                 'cpf' => '53883126233',
-                'cns' => '277921612390008',
+                'cns' => '782117834591027',
                 'birth_date' => '1988-12-01',
                 'gender' => 'F',
                 'phone' => '51944443333',
@@ -94,7 +94,7 @@ class PatientSeeder extends Seeder
             [
                 'name' => 'Bruno Rocha',
                 'cpf' => '86156664238',
-                'cns' => '105187529340006',
+                'cns' => '954528806583435',
                 'birth_date' => '1992-04-18',
                 'gender' => 'M',
                 'phone' => '61933332222',
