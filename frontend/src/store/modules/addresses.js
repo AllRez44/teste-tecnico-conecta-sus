@@ -1,4 +1,4 @@
-import { apiGetAddress, apiGetAddresses, apiPostAddress, apiDeleteAddress } from "@/services/addresses.service";
+import { apiGetAddress, apiGetAddresses, apiPostAddress, apiDeleteAddress, apiPutAddress } from "@/services/addresses.service";
 
 export const addressesStore = {
     state: () => ({
@@ -52,6 +52,15 @@ export const addressesStore = {
                 commit('setAddress', response.data);
             } catch (error) {
                 console.error(`Error posting address: ${JSON.stringify(address.toString())} \n Error:`, error);
+                throw error;
+            }
+        },
+        async putAddress({ commit }, { id, address }) {
+            try {
+                const response = await apiPutAddress({ id, address });
+                commit('setAddress', response.data);
+            } catch (error) {
+                console.error(`Error putting address ID ${id}: `, error);
                 throw error;
             }
         },

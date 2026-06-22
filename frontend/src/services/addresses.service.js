@@ -17,6 +17,10 @@ export const apiPostAddress = async({ address }) => {
     return await api.post('/addresses', address);
 }
 
+export const apiPutAddress = async({ id, address }) => {
+    return await api.put('/addresses/' + id, address);
+}
+
 export const apiDeleteAddress = async({ id }) => {
     return await api.delete('/addresses/' + id);
 }

@@ -1,4 +1,4 @@
-import { apiGetPatient, apiGetPatients, apiPostPatient, apiDeletePatient } from "@/services/patients.service";
+import { apiGetPatient, apiGetPatients, apiPostPatient, apiDeletePatient, apiPutPatient } from "@/services/patients.service";
 
 export const patientsStore = {
     state: () => ({
@@ -56,6 +56,16 @@ export const patientsStore = {
             } catch (error) {
                 console.error(`Error posting patient: ${JSON.stringify(patient.toString())} \n Error:`, error);
                 dispatch('showError', error.message || 'Erro ao salvar paciente');
+                throw error;
+            }
+        },
+        async putPatient({ commit, dispatch }, { id, patient }) {
+            try {
+                const response = await apiPutPatient({ id, patient });
+                commit('setPatient', response.data);
+            } catch (error) {
+                console.error(`Error putting patient ID ${id}: `, error);
+                dispatch('showError', error.message || 'Erro ao atualizar paciente');
                 throw error;
             }
         },

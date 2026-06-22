@@ -18,6 +18,10 @@ export const apiPostPatient = async({ patient }) => {
     return await api.post('/patients', patient);
 }
 
+export const apiPutPatient = async({ id, patient }) => {
+    return await api.put('/patients/' + id, patient);
+}
+
 export const apiDeletePatient = async({ id }) => {
     return await api.delete('/patients/' + id);
 }
