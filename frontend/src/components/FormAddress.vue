@@ -14,7 +14,9 @@
         <BaseInput id="city" label="Cidade" placeholder="Ex: São Paulo" v-model="form.city" required />
       </b-col>
       <b-col md="6">
-        <BaseInput id="state" label="UF" placeholder="Ex: SP" v-model="form.state" required />
+        <b-form-group label="UF" label-for="state" label-class="text-left font-weight-bold">
+          <b-form-select id="state" v-model="form.state" :options="stateOptions" required />
+        </b-form-group>
       </b-col>
     </b-row>
   </BaseForm>
@@ -23,7 +25,7 @@
 <script>
 import BaseForm from '@/components/BaseForm.vue';
 import BaseInput from '@/components/BaseInput.vue';
-import { VIA_CEP_API_URL, getOnlyNumbers } from '@/utils';
+import { VIA_CEP_API_URL, getOnlyNumbers, BRAZILIAN_STATES } from '@/utils';
 
 export default {
   name: 'FormAddress',
@@ -40,7 +42,11 @@ export default {
         city: '',
         state: ''
       },
-      lastFetchedCep: ''
+      lastFetchedCep: '',
+      stateOptions: [
+        { text: 'Selecione', value: '', disabled: true },
+        ...BRAZILIAN_STATES.map(state => ({ text: state, value: state }))
+      ]
     }
   },
   computed: {
