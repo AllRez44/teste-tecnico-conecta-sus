@@ -105,6 +105,7 @@ export default {
       const cep = getOnlyNumbers(this.form.zip_code);
       if (cep.length === 8) {
         try {
+          // TODO: Replace fetch API with use Axios in address.service.js with customOptions (Loading and Error Handling OFF)
           const url = VIA_CEP_API_URL.replace(':CEP', cep);
           const response = await fetch(url);
           const data = await response.json();
