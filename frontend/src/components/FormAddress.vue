@@ -1,25 +1,37 @@
 <template>
-  <BaseForm @submit="handleSubmit" @cancel="$emit('cancel')">
-    <b-row>
-      <b-col md="6">
-        <BaseInput id="zip_code" label="CEP" placeholder="Ex: 01310-200" v-model="form.zip_code" required mask="#####-###" @keyup.native="handleCepInput" />
-      </b-col>
-      <b-col md="6">
-        <BaseInput id="street" label="Logradouro" placeholder="Ex: Avenida Paulista" v-model="form.street" required />
-      </b-col>
-      <b-col md="6">
-        <BaseInput id="neighborhood" label="Bairro" placeholder="Ex: Bela Vista" v-model="form.neighborhood" required />
-      </b-col>
-      <b-col md="6">
-        <BaseInput id="city" label="Cidade" placeholder="Ex: São Paulo" v-model="form.city" required />
-      </b-col>
-      <b-col md="6">
-        <b-form-group label="UF" label-for="state" label-class="text-left font-weight-bold">
-          <b-form-select id="state" v-model="form.state" :options="stateOptions" required />
-        </b-form-group>
-      </b-col>
-    </b-row>
-  </BaseForm>
+  <ValidationObserver ref="observer" v-slot="{ handleSubmit: handleValidate }">
+    <BaseForm @submit="handleValidate(handleSubmit)" @cancel="$emit('cancel')">
+      <b-row>
+        <b-col md="6">
+          <ValidationProvider name="CEP" rules="required" v-slot="{ errors }">
+            <BaseInput id="zip_code" label="CEP" placeholder="Ex: 01310-200" v-model="form.zip_code" required mask="#####-###" @keyup.native="handleCepInput" :error="errors[0]" />
+          </ValidationProvider>
+        </b-col>
+        <b-col md="6">
+          <ValidationProvider name="Logradouro" rules="required" v-slot="{ errors }">
+            <BaseInput id="street" label="Logradouro" placeholder="Ex: Avenida Paulista" v-model="form.street" required :error="errors[0]" />
+          </ValidationProvider>
+        </b-col>
+        <b-col md="6">
+          <ValidationProvider name="Bairro" rules="required" v-slot="{ errors }">
+            <BaseInput id="neighborhood" label="Bairro" placeholder="Ex: Bela Vista" v-model="form.neighborhood" required :error="errors[0]" />
+          </ValidationProvider>
+        </b-col>
+        <b-col md="6">
+          <ValidationProvider name="Cidade" rules="required" v-slot="{ errors }">
+            <BaseInput id="city" label="Cidade" placeholder="Ex: São Paulo" v-model="form.city" required :error="errors[0]" />
+          </ValidationProvider>
+        </b-col>
+        <b-col md="6">
+          <ValidationProvider name="UF" rules="required" v-slot="{ errors }">
+            <b-form-group label="UF" label-for="state" label-class="text-left font-weight-bold" :invalid-feedback="errors[0]" :state="errors[0] ? false : null">
+              <b-form-select id="state" v-model="form.state" :options="stateOptions" :class="{ 'is-invalid': !!errors[0] }" required />
+            </b-form-group>
+          </ValidationProvider>
+        </b-col>
+      </b-row>
+    </BaseForm>
+  </ValidationObserver>
 </template>
 
 <script>

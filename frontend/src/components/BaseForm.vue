@@ -1,5 +1,5 @@
 <template>
-  <b-form @submit.prevent="$emit('submit')" class="custom-form-wrapper p-4">
+  <b-form @submit.prevent="$emit('submit')" novalidate class="custom-form-wrapper p-4">
     <div class="form-content">
       <slot></slot>
     </div>

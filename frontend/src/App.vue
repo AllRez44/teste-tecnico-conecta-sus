@@ -20,4 +20,8 @@ import GlobalLoader from "@/components/GlobalLoader.vue";
   text-align: center;
   color: #2c3e50;
 }
+
+.invalid-feedback {
+  text-align: left;
+}
 </style>
