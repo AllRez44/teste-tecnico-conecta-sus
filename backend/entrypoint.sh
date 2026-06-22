@@ -18,11 +18,11 @@ if ! grep -q "APP_KEY=base64:" .env; then
     php artisan key:generate
 fi
 
-echo "Running migrations and seeders..."
+# echo "Running migrations and seeders..."
 
-until php artisan migrate --seed --force 2>/dev/null; do
-    echo "Database not ready. Retrying in 2 seconds..."
-    sleep 2
-done
+# until php artisan migrate --seed --force 2>/dev/null; do
+#     echo "Database not ready. Retrying in 2 seconds..."
+#     sleep 2
+# done
 
 exec "$@"
