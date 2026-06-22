@@ -55,6 +55,22 @@ class PatientControllerTest extends TestCase
             ->assertJsonCount(2, 'data');
     }
 
+    public function test_uses_default_pagination_per_page()
+    {
+        $address = Address::factory()->create();
+        Patient::factory()->count(15)->create([
+            'address_id' => $address->id,
+            'cpf' => function() { return $this->generateValidCpf(); },
+            'cns' => function() { return $this->generateValidCns(); },
+        ]);
+
+        $response = $this->getJson('/api/patients');
+
+        $response->assertStatus(200)
+            ->assertJsonPath('per_page', 10)
+            ->assertJsonCount(10, 'data');
+    }
+
     public function test_can_paginate_patients_page()
     {
         $address = Address::factory()->create();

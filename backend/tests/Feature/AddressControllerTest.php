@@ -33,6 +33,17 @@ class AddressControllerTest extends TestCase
       ->assertJsonCount(2, 'data');
   }
 
+  public function test_uses_default_pagination_per_page()
+  {
+    Address::factory()->count(15)->create();
+
+    $response = $this->getJson('/api/addresses');
+
+    $response->assertStatus(200)
+      ->assertJsonPath('per_page', 10)
+      ->assertJsonCount(10, 'data');
+  }
+
   public function test_can_paginate_addresses_page()
   {
     Address::factory()->count(5)->create();
