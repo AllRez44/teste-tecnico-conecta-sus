@@ -2,13 +2,13 @@
 
 Este é um projeto full stack desenvolvido para avaliação técnica, focando na gestão de pacientes e seus respectivos endereços. A aplicação é dividida em um backend em PHP (Laravel) e um frontend em JavaScript (Vue.js 2). Todo o ambiente de desenvolvimento e execução é orquestrado através do Docker.
 
-## 🚀 Requisitos Prévios
+## Requisitos
 
 Para rodar este projeto, você precisará ter instalado em sua máquina:
 - [Docker](https://docs.docker.com/get-docker/)
 - [Docker Compose](https://docs.docker.com/compose/install/)
 
-## ⚙️ Como Executar o Projeto
+## Como Executar o Projeto
 
 Siga as instruções abaixo para iniciar a aplicação pela primeira vez. O projeto é bem simples e quase tudo foi automatizado no Docker.
 
@@ -53,7 +53,7 @@ Depois que os containers estiverem rodando e os builds finalizados:
 
 ---
 
-## 🏗 Estrutura de Containers
+## Estrutura de Containers
 
 A infraestrutura foi desenhada para separar as responsabilidades e garantir a persistência dos dados:
 
@@ -66,7 +66,7 @@ A infraestrutura foi desenhada para separar as responsabilidades e garantir a pe
 
 ---
 
-## 🧩 Estrutura do Projeto e Tecnologias
+## Estrutura do Projeto e Tecnologias
 
 ### Servidor e Banco de Dados
 - **Proxy/Servidor Web:** Nginx (Proxy reverso para o PHP-FPM e servidor de arquivos estáticos para o frontend)
@@ -90,6 +90,7 @@ A infraestrutura foi desenhada para separar as responsabilidades e garantir a pe
   ├── components/          # Componentes reutilizáveis genéricos e formulários
   │   ├── layouts/         # Layout base da aplicação
   │   ├── BaseInput.vue    # Campo reutilizável com label + erro
+  │   ├── BaseForm.vue    # Formulário genérico
   │   ├── BaseTable.vue    # Tabela genérica
   │   ├── Pagination.vue   # Controle de páginas client-side
   │   ├── ConfirmModal.vue # Modal de confirmação (exclusões)
@@ -99,18 +100,10 @@ A infraestrutura foi desenhada para separar as responsabilidades e garantir a pe
   │   ├── pacientes/       # Páginas de pacientes (Index.vue e Form.vue)
   │   └── enderecos/       # Páginas de endereços (Index.vue e Form.vue)
   ├── store/               # Gerenciamento de estado global
-  ├── services/            # Serviços de integração (Axios, api.js)
+  ├── plugins/             # Configuração de plugins de terceiros (Axios, Bootstrap-Vue, VueMask, VeeValidate)
+  ├── services/            # Serviços de integração de APIs (Axios)
   └── router/              # Configuração do Vue Router
   ```
-
-#### Perguntas Frequentes (Como fazer / Onde encontrar)
-
-**1. Onde fica a View da página de formulário de pacientes?**
-- A página (view) roteada fica em `frontend/src/views/pacientes/Form.vue`.
-- O componente de formulário reutilizável consumido por ela fica em `frontend/src/components/FormPatient.vue`.
-
-**2. Como adicionar uma nova regra de validação no Frontend?**
-- O frontend utiliza o **VeeValidate** para validação reativa. Para adicionar ou modificar validações em campos, você deve procurar o componente respectivo (como o `FormPatient.vue`) e adicionar a nova regra no atributo `rules` do `ValidationProvider` associado ao campo. 
 
 ### Requisitos de Interface Implementados
 
