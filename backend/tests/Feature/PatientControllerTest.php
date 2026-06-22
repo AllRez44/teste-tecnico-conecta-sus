@@ -60,8 +60,6 @@ class PatientControllerTest extends TestCase
         $address = Address::factory()->create();
         Patient::factory()->count(15)->create([
             'address_id' => $address->id,
-            'cpf' => function() { return $this->generateValidCpf(); },
-            'cns' => function() { return $this->generateValidCns(); },
         ]);
 
         $response = $this->getJson('/api/patients');
