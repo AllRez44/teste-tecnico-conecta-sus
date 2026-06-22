@@ -25,7 +25,7 @@ export const patientsStore = {
         }
     },
     actions: {
-        async getPatients({ commit, dispatch }, { searchParams } = {}) {
+        async getPatients({ commit }, { searchParams } = {}) {
             try {
                 const response = await apiGetPatients({ searchParams });
                 commit('setPatients', response.data.data);
@@ -35,37 +35,33 @@ export const patientsStore = {
                 } else {
                     console.error(`Error fetching patients: \n Error:`, error);
                 }
-                dispatch('showError', error.message || 'Erro ao buscar pacientes');
                 throw error;
             }
         },
-        async getPatient({ commit, dispatch }, { id }) {
+        async getPatient({ commit }, { id }) {
             try {
                 const response = await apiGetPatient({ id });
                 commit('setPatient', response.data);
             } catch (error) {
                 console.error(`Error fetching patient ID ${id}: `, error);
-                dispatch('showError', error.message || 'Erro ao buscar paciente');
                 throw error;
             }
         },
-        async postPatient({ commit, dispatch }, { patient }) {
+        async postPatient({ commit }, { patient }) {
             try {
                 const response = await apiPostPatient({ patient });
                 commit('setPatient', response.data);
             } catch (error) {
                 console.error(`Error posting patient: ${JSON.stringify(patient.toString())} \n Error:`, error);
-                dispatch('showError', error.message || 'Erro ao salvar paciente');
                 throw error;
             }
         },
-        async putPatient({ commit, dispatch }, { id, patient }) {
+        async putPatient({ commit }, { id, patient }) {
             try {
                 const response = await apiPutPatient({ id, patient });
                 commit('setPatient', response.data);
             } catch (error) {
                 console.error(`Error putting patient ID ${id}: `, error);
-                dispatch('showError', error.message || 'Erro ao atualizar paciente');
                 throw error;
             }
         },
