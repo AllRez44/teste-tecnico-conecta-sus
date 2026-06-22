@@ -46,3 +46,20 @@ export const formatCNS = (cns) => {
   
   return `${clean.slice(0, 3)} ${clean.slice(3, 7)} ${clean.slice(7, 11)} ${clean.slice(11)}`;
 };
+
+export const formatPhone = (phone) => {
+  if (!phone) return '-';
+  const clean = getOnlyNumbers(phone);
+  if (clean.length === 11) {
+    return `(${clean.slice(0, 2)}) ${clean.slice(2, 7)}-${clean.slice(7)}`;
+  }
+  if (clean.length === 10) {
+    return `(${clean.slice(0, 2)}) ${clean.slice(2, 6)}-${clean.slice(6)}`;
+  }
+  return phone;
+};
+
+export const formatGender = (gender) => {
+  if (!gender) return '-';
+  return String(gender).charAt(0).toUpperCase();
+};
