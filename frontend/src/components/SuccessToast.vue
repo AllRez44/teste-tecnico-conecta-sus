@@ -1,3 +1,4 @@
+<!-- TODO: Refactor to a global toast component with different variants (Error, Success, Info, Warning, etc) -->
 <template>
   <b-toast 
     v-model="hasSuccess" 
