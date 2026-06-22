@@ -3,7 +3,7 @@ import PageHeader from "@/components/PageHeader.vue";
 import PageLayout from "@/components/layouts/PageLayout.vue";
 import TablePaginated from "@/components/TablePaginated.vue";
 import ConfirmModal from "@/components/ConfirmModal.vue";
-import { formatDate, formatApiSearchParams, formatCPF, formatCNS } from "@/utils";
+import { formatDate, formatApiSearchParams, formatCPF, formatCNS, formatPhone, formatGender } from "@/utils";
 
 export default {
   name: "PatientsView",
@@ -32,6 +32,8 @@ export default {
         { key: 'cpf', label: 'CPF', sortable: true, thClass: 'font-weight-bold text-dark' },
         { key: 'cns', label: 'CNS', sortable: true, thClass: 'font-weight-bold text-dark' },
         { key: 'birth_date', label: 'Data de Nascimento', sortable: true, thClass: 'font-weight-bold text-dark' },
+        { key: 'gender', label: 'Gênero', sortable: true, thClass: 'font-weight-bold text-dark' },
+        { key: 'phone', label: 'Telefone', sortable: true, thClass: 'font-weight-bold text-dark' },
         { key: 'acoes', label: 'Ações', thClass: 'font-weight-bold text-dark text-right', tdClass: 'text-right' }
       ],
       itemToDelete: null
@@ -65,6 +67,8 @@ export default {
     formatDate,
     formatCPF,
     formatCNS,
+    formatPhone,
+    formatGender,
   },
   watch: {
     '$route.query.page': 'fetchPatients',
@@ -103,6 +107,12 @@ export default {
       </template>
       <template #cell(birth_date)="data">
         {{ formatDate(data.item.birth_date) }}
+      </template>
+      <template #cell(gender)="data">
+        {{ formatGender(data.item.gender) }}
+      </template>
+      <template #cell(phone)="data">
+        {{ formatPhone(data.item.phone) }}
       </template>
       <template #cell(acoes)="data">
         <b-button variant="link" class="p-0 mr-3 text-primary" @click="handleEdit(data.item)">
