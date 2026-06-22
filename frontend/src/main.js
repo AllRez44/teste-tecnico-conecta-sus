@@ -9,6 +9,7 @@ import store from './store'
 import {ValidationProvider, ValidationObserver, extend} from 'vee-validate';
 import {required} from "vee-validate/dist/rules";
 import VueMask from 'v-mask';
+import { getOnlyNumbers } from '@/utils';
 
 Vue.config.productionTip = false
 
@@ -29,6 +30,16 @@ extend('past_or_today', {
     return selectedDate <= today;
   },
   message: '{_field_} não pode ser uma data futura'
+});
+
+extend('digits', {
+  validate(value, { length }) {
+    if (!value) return true;
+    const cleanValue = getOnlyNumbers(value);
+    return cleanValue.length === Number(length);
+  },
+  params: ['length'],
+  message: '{_field_} inválido'
 });
 
 Vue.component('ValidationProvider', ValidationProvider);
