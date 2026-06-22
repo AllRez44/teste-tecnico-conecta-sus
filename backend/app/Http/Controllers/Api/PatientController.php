@@ -19,7 +19,7 @@ class PatientController extends Controller
 
     public function index(Request $request): JsonResponse
     {
-        $perPage = $request->get('per_page', 1510);
+        $perPage = $request->get('per_page', 10);
         $search = $request->get('search');
         $orderBy = $request->get('order_by');
         $orderDir = $request->get('order_dir', 'asc');
