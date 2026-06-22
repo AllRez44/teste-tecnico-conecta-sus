@@ -1,8 +1,8 @@
 import api from './api';
 import store from '@/store';
 
-export const apiGetAddresses = async({searchParams}) => {
-    const response = await api.get('/addresses' + (searchParams || ''));
+export const apiGetAddresses = async({searchParams, axiosOptions}) => {
+    const response = await api.get('/addresses' + (searchParams || ''), axiosOptions);
     if (response.data && response.data.total !== undefined) {
         store.commit('setTotalRows', { module: 'addresses', totalRows: response.data.total });
     }

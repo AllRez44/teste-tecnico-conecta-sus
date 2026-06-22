@@ -25,9 +25,9 @@ export const addressesStore = {
         }
     },
     actions: {
-        async getAddresses({ commit }, { searchParams } = {}) {
+        async getAddresses({ commit }, { searchParams, axiosOptions } = {}) {
             try {
-                const response = await apiGetAddresses({ searchParams });
+                const response = await apiGetAddresses({ searchParams, axiosOptions });
                 commit('setAddresses', response.data.data);
             } catch (error) {
                 if (searchParams) {
