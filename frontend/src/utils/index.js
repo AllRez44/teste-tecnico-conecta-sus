@@ -2,6 +2,8 @@ export const API_URL = process.env.VUE_APP_API_URL;
 
 export const VIA_CEP_API_URL = "https://viacep.com.br/ws/:CEP/json/";
 
+export const BRAZILIAN_STATES = ['AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MT', 'MS', 'MG', 'PA', 'PB', 'PR', 'PE', 'PI', 'RJ', 'RN', 'RS', 'RO', 'RR', 'SC', 'SP', 'SE', 'TO'];
+
 export const numberFormatter = new Intl.NumberFormat('pt-BR');
 
 export const formatDate = (dateStr) => {
